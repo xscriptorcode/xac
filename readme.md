@@ -105,7 +105,7 @@ Este proyecto está licenciado bajo la [MIT License](https://opensource.org/lice
 ---
 
 ### **Contacto**
-Autor: **Tu Nombre**  
+Autor: **xscriptorcode**  
 Correo: [x@xscriptor.com](mailto:x@xscriptor.com)  
 GitHub: [xscriptorcode](https://github.com/xscriptorcode)
 
