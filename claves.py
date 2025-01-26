@@ -1,7 +1,7 @@
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
-
+from cryptography.hazmat.primitives import serialization
 def generar_claves():
     """Genera un par de claves RSA."""
     private_key = rsa.generate_private_key(
@@ -30,3 +30,17 @@ def importar_clave_privada(filepath, password):
             backend=default_backend()
         )
     return private_key
+
+def exportar_clave_publica(public_key, archivo_salida):
+    try:
+        # Serializar la clave pública en formato PEM
+        with open(archivo_salida, "wb") as archivo:
+            archivo.write(
+                public_key.public_bytes(
+                    encoding=serialization.Encoding.PEM,
+                    format=serialization.PublicFormat.SubjectPublicKeyInfo
+                )
+            )
+        print(f"Llave pública exportada correctamente a {archivo_salida}")
+    except Exception as e:
+        print(f"Error al exportar la llave pública: {e}")

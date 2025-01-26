@@ -56,6 +56,24 @@ def descifrar_archivo_gui():
             with open(save_path, "wb") as file:
                 file.write(decrypted_data)
             status_label.config(text="Archivo descifrado exitosamente.")
+def exportar_clave_publica_gui():
+    if not public_key:
+        status_label.config(text="Primero genera o importa una clave.")
+        return
+    # Diálogo para guardar el archivo
+    filepath = filedialog.asksaveasfilename(
+        title="Guardar clave pública", 
+        defaultextension=".pem",
+        filetypes=[("Archivo PEM", "*.pem")]
+    )
+    if filepath:
+        try:
+            from claves import exportar_clave_publica
+            exportar_clave_publica(public_key, filepath)
+            status_label.config(text=f"Clave pública exportada exitosamente en: {filepath}")
+        except Exception as e:
+            status_label.config(text=f"Error al exportar la clave pública: {e}")
+
 
 # Interfaz Tkinter
 style = Style(theme="darkly")
@@ -71,6 +89,7 @@ Button(root, text="Exportar Clave Privada", command=exportar_clave_gui, width=25
 Button(root, text="Importar Clave Privada", command=importar_clave_gui, width=25).pack(pady=5)
 Button(root, text="Cifrar Archivo", command=cifrar_archivo_gui, width=25).pack(pady=5)
 Button(root, text="Descifrar Archivo", command=descifrar_archivo_gui, width=25).pack(pady=5)
+Button(root, text="Exportar Clave Pública", command=exportar_clave_publica_gui, width=25).pack(pady=5)
 status_label = Label(root, text="", font=("Times New Roman", 10), fg="green")
 status_label.pack(pady=10)
 
