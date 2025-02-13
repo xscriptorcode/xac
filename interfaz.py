@@ -1,12 +1,29 @@
+import os
+import sys
 from tkinter import PhotoImage, Tk, filedialog, Button, Label
 from claves import generar_claves, exportar_clave_privada, importar_clave_privada
 from cifrado import cifrar_archivo, descifrar_archivo
 from ttkbootstrap import Style
 from ttkbootstrap.constants import *
 
+# Función para obtener la ruta de los recursos (compatible con PyInstaller)
+def get_resource_path(relative_path):
+    """ Devuelve la ruta correcta del recurso, compatible con PyInstaller """
+    try:
+        base_path = sys._MEIPASS  # Si el script está congelado en un .exe
+    except AttributeError:
+        base_path = os.path.abspath(".")  # Si se ejecuta como un script normal
+
+    return os.path.join(base_path, relative_path)
+
+# Cargar el icono con la ruta correcta
+icon_path = get_resource_path("icon.png")
+
+# Variables globales para las claves
 private_key = None
 public_key = None
 
+# Funciones de la interfaz gráfica
 def generar_claves_gui():
     global private_key, public_key
     private_key, public_key = generar_claves()
@@ -56,16 +73,13 @@ def descifrar_archivo_gui():
             with open(save_path, "wb") as file:
                 file.write(decrypted_data)
             status_label.config(text="Archivo descifrado exitosamente.")
+
 def exportar_clave_publica_gui():
     if not public_key:
         status_label.config(text="Primero genera o importa una clave.")
         return
-    # Diálogo para guardar el archivo
-    filepath = filedialog.asksaveasfilename(
-        title="Guardar clave pública", 
-        defaultextension=".pem",
-        filetypes=[("Archivo PEM", "*.pem")]
-    )
+    filepath = filedialog.asksaveasfilename(title="Guardar clave pública", defaultextension=".pem",
+                                            filetypes=[("Archivo PEM", "*.pem")])
     if filepath:
         try:
             from claves import exportar_clave_publica
@@ -74,15 +88,20 @@ def exportar_clave_publica_gui():
         except Exception as e:
             status_label.config(text=f"Error al exportar la clave pública: {e}")
 
-
-# Interfaz Tkinter
+# Configuración de la interfaz gráfica con ttkbootstrap
 style = Style(theme="darkly")
 root = style.master
 root.title("X-A-Cypher")
 root.geometry("400x250")
-icon = PhotoImage(file="icon.png")
-root.iconphoto(True, icon) 
 
+# Cargar el icono si existe
+if os.path.exists(icon_path):
+    icon = PhotoImage(file=icon_path)
+    root.iconphoto(True, icon)
+else:
+    print(f"Advertencia: No se encontró el icono en {icon_path}")
+
+# Elementos de la interfaz
 Label(root, text="X-A-C", font=("Times New Roman", 14)).pack(pady=10)
 Button(root, text="Generar Claves", command=generar_claves_gui, width=25).pack(pady=5)
 Button(root, text="Exportar Clave Privada", command=exportar_clave_gui, width=25).pack(pady=5)
@@ -90,7 +109,9 @@ Button(root, text="Importar Clave Privada", command=importar_clave_gui, width=25
 Button(root, text="Cifrar Archivo", command=cifrar_archivo_gui, width=25).pack(pady=5)
 Button(root, text="Descifrar Archivo", command=descifrar_archivo_gui, width=25).pack(pady=5)
 Button(root, text="Exportar Clave Pública", command=exportar_clave_publica_gui, width=25).pack(pady=5)
+
 status_label = Label(root, text="", font=("Times New Roman", 10), fg="green")
 status_label.pack(pady=10)
 
+# Ejecutar la interfaz
 root.mainloop()

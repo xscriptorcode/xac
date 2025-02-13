@@ -111,4 +111,4 @@ GitHub: [xscriptorcode](https://github.com/xscriptorcode)
 
 ---
 
-Si necesitas que lo ajuste más o agregue algo, ¡avísame! 😊
+Si necesitas que lo ajuste más o agregue algo, ¡avísame!, si quieres añadir algo al código siéntete libre de hacer un fork 😊
