@@ -2,6 +2,8 @@
 
 X-Art-Cypher permite **cifrar y descifrar archivos** utilizando una combinación de RSA (8192 bits) y AES (256 bits). Es ideal para proteger datos sensibles de forma segura y eficiente.
 
+![demo](./screenshots/preview.png)
+
 ### **Características**
 - Cifra cualquier tipo de archivo: documentos, imágenes, archivos comprimidos (.rar, .zip), entre otros.
 - Utiliza **RSA (8192 bits)** para garantizar la seguridad de las claves.
