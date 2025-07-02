@@ -41,7 +41,60 @@ X-Art-Cypher permite **cifrar y descifrar archivos** utilizando una combinación
 
 ---
 
-### **Uso del Programa**
+### **Métodos de uso XAC**
+
+## Mediante terminal:
+### Comandos disponibles
+
+### 1. Cifrar un archivo
+
+```bash
+python3 xac_cli.py cifrar ruta/al/archivo --clave ruta/a/clave_publica.pem
+```
+
+**Parámetros:**
+
+- `ruta/al/archivo`: archivo que se desea cifrar.
+- `--clave`: ruta del archivo `.pem` que contiene la clave pública.
+- `--salida` (opcional): ruta del archivo de salida. Si no se indica, se añadirá `.cifrado`.
+
+**Ejemplo:**
+
+```bash
+python3 xac_cli.py cifrar documento.pdf --clave clave_publica.pem --salida documento_seguro.dat
+```
+
+---
+
+### 2. Descifrar un archivo
+
+```bash
+python3 xac_cli.py descifrar ruta/al/archivo_cifrado --clave ruta/a/clave_privada.pem --password contraseña
+```
+
+**Parámetros:**
+
+- `ruta/al/archivo_cifrado`: archivo previamente cifrado.
+- `--clave`: ruta al archivo `.pem` con la clave privada.
+- `--password`: contraseña de la clave privada.
+- `--salida` (opcional): ruta del archivo de salida. Si no se indica, se añadirá `.descifrado`.
+
+**Ejemplo:**
+
+```bash
+python3 xac_cli.py descifrar documento_seguro.dat --clave clave_privada.pem --password mipassword --salida documento_recuperado.pdf
+```
+
+---
+
+## Notas adicionales
+
+- El script carga las claves directamente desde archivos `.pem`.
+- Para cifrar se necesita una clave pública.
+- Para descifrar se necesita una clave privada protegida por contraseña.
+
+---
+### Mediante GUI:
 
 #### **1. Generar Claves**
 - Haz clic en "Generar Claves" para crear un par de claves pública y privada.
@@ -109,6 +162,3 @@ Autor: **xscriptorcode**
 Correo: [x@xscriptor.com](mailto:x@xscriptor.com)  
 GitHub: [xscriptorcode](https://github.com/xscriptorcode)
 
----
-
-Si necesitas que lo ajuste más o agregue algo, ¡avísame!, si quieres añadir algo al código siéntete libre de hacer un fork 😊
