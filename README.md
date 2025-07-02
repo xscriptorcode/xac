@@ -171,16 +171,3 @@ pip install -r requirements.txt
 
 ### **Licencia**
 Este proyecto está licenciado bajo la [MIT License](https://opensource.org/licenses/MIT).
-
----
-
-### **Contribuciones**
-¡Se aceptan sugerencias y mejoras! Si tienes una idea o encuentras un problema, abre un **Issue** o envía un **Pull Request** en el repositorio.
-
----
-
-### **Contacto**
-Autor: **xscriptorcode**  
-Correo: [x@xscriptor.com](mailto:x@xscriptor.com)  
-GitHub: [xscriptorcode](https://github.com/xscriptorcode)
-
