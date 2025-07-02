@@ -46,7 +46,27 @@ X-Art-Cypher permite **cifrar y descifrar archivos** utilizando una combinación
 ## Mediante terminal:
 ### Comandos disponibles
 
-### 1. Cifrar un archivo
+
+### 1. Generar claves RSA
+Utiliza el script generar_claves_cli.py para crear una clave pública y privada protegida por contraseña.
+
+```bash
+python3 generar_claves_cli.py --privada clave_privada.pem --publica clave_publica.pem --password tu_contraseña
+```
+* --privada: ruta donde se guardará la clave privada (protegida).
+
+* --publica: ruta donde se guardará la clave pública.
+
+* --password: contraseña para proteger la clave privada.
+
+Ejemplo:
+
+```bash
+python3 generar_claves_cli.py --privada clave_privada.pem --publica clave_publica.pem --password segura123
+```
+
+
+### 2. Cifrar un archivo
 
 ```bash
 python3 xac_cli.py cifrar ruta/al/archivo --clave ruta/a/clave_publica.pem
@@ -66,7 +86,7 @@ python3 xac_cli.py cifrar documento.pdf --clave clave_publica.pem --salida docum
 
 ---
 
-### 2. Descifrar un archivo
+### 3. Descifrar un archivo
 
 ```bash
 python3 xac_cli.py descifrar ruta/al/archivo_cifrado --clave ruta/a/clave_privada.pem --password contraseña
