@@ -25,7 +25,7 @@ export default function EncryptPage() {
       return;
     }
 
-    const encrypted = await encryptBufferWithºPassword(buffer, password);
+    const encrypted = await encryptBufferWithPassword(buffer, password);
     setEncryptedBlob(new Blob([encrypted]));
   };
 

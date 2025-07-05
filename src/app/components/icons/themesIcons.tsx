@@ -7,7 +7,7 @@ export function SunIcon() {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill="none"
+        fill="white"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
@@ -38,7 +38,7 @@ export function MoonIcon() {
       <svg
          xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill="none"
+        fill="black"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"

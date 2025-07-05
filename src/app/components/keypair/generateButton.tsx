@@ -25,7 +25,11 @@ export default function GenerateButton({ password, options, onKeysGenerated }: P
   return (
     <button
       onClick={handleGenerate}
-      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+      className="mt-4 w-full px-5 py-3 rounded-2xl 
+                 bg-white/10 backdrop-blur-md 
+                 border border-white/20 
+                 text-[var(--foreground)] font-semibold 
+                 hover:bg-white/20 transition duration-300 shadow-md"
     >
       Generar par de claves
     </button>

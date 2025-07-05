@@ -1,4 +1,5 @@
 "use client";
+
 async function deriveBaseKey(password: string): Promise<CryptoKey> {
   const encoder = new TextEncoder();
   const salt = encoder.encode("XAC-Static-Salt");
@@ -29,7 +30,7 @@ async function deriveBaseKey(password: string): Promise<CryptoKey> {
 }
 
 export type KeyOptions =
-  | { type: "RSA"; bits: 2048 | 3072 | 4096 }
+  | { type: "RSA"; bits: 1024 | 2048 | 3072 | 7680 | 15360 }
   | { type: "ECDSA"; curve: "P-256" | "P-384" | "P-521" };
 
 export async function generateKeyPairFromPassword(

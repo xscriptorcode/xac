@@ -42,8 +42,8 @@ export default function ThemeToggle() {
           w-2 h-2 rounded-full transition-all duration-300
           opacity-0 group-hover:opacity-100
           ${theme === 'dark'
-            ? 'right-1 bg-black'
-            : 'left-1 bg-yellow-400'}
+            ? 'right-1 bg-yellow-400'
+            : 'left-1 bg-black'}
         `}
       />
 

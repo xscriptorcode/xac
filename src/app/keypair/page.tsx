@@ -6,6 +6,7 @@ import KeyOptionsSelector from "@/app/components/keypair/keyOptionsSelector";
 import GenerateButton from "@/app/components/keypair/generateButton";
 import KeyDisplay from "@/app/components/keypair/keyDisplay";
 import { exportKeyToBase64, KeyOptions } from "@/app/utils/crypto";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function KeyPairPage() {
   const [password, setPassword] = useState("");
@@ -26,6 +27,7 @@ export default function KeyPairPage() {
 
   return (
     <main className="p-6 max-w-2xl mx-auto text-white">
+        <div className="flex flexcolumn items-center justify-center"><ThemeToggle /></div>
       <h1 className="text-2xl font-bold mb-6">Generar par de claves</h1>
 
       <PasswordInput value={password} onChange={setPassword} />
