@@ -6,7 +6,7 @@ import KeyOptionsSelector from "@/app/components/keypair/keyOptionsSelector";
 import GenerateButton from "@/app/components/keypair/generateButton";
 import KeyDisplay from "@/app/components/keypair/keyDisplay";
 import { exportKeyToPEM, KeyOptions } from "@/app/utils/crypto";
-import ThemeToggle from "../components/ThemeToggle";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 export default function KeyPairPage() {
   const [password, setPassword] = useState("");
@@ -17,6 +17,8 @@ export default function KeyPairPage() {
 
   const [publicKey, setPublicKey] = useState<string | null>(null);
   const [privateKey, setPrivateKey] = useState<string | null>(null);
+  const allowedBits = [1024, 2048, 3072, 7680, 15360] as const;
+  const allowedCurves = ["P-256", "P-384", "P-521"] as const;
 
   const handleKeysGenerated = async (keyPair: CryptoKeyPair) => {
     const pub = await exportKeyToPEM(keyPair.publicKey);
@@ -35,7 +37,31 @@ export default function KeyPairPage() {
       </h1>
 
       <PasswordInput value={password} onChange={setPassword} />
-      <KeyOptionsSelector selected={options} onChange={setOptions} />
+      <KeyOptionsSelector
+        selected={options}
+        onChange={(newValue) => {
+          if (
+            newValue.type === "RSA" &&
+            allowedBits.includes(newValue.bits as (typeof allowedBits)[number])
+          ) {
+            setOptions({
+              type: "RSA",
+              bits: newValue.bits as (typeof allowedBits)[number],
+            });
+          } else if (
+            newValue.type === "ECDSA" &&
+            allowedCurves.includes(
+              newValue.curve as (typeof allowedCurves)[number]
+            )
+          ) {
+            setOptions({
+              type: "ECDSA",
+              curve: newValue.curve as (typeof allowedCurves)[number],
+            });
+          }
+        }}
+      />
+
       <div className="flex">
         <GenerateButton
           password={password}
@@ -44,7 +70,11 @@ export default function KeyPairPage() {
         />
       </div>
       {publicKey && privateKey && (
-        <KeyDisplay publicKey={publicKey} privateKey={privateKey} />
+        <KeyDisplay
+          publicKey={publicKey}
+          privateKey={privateKey}
+          password={password}
+        />
       )}
     </main>
   );

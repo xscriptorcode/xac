@@ -37,7 +37,8 @@ export async function generateKeyPairFromPassword(
   password: string,
   options: KeyOptions
 ): Promise<CryptoKeyPair> {
-  await deriveBaseKey(password); // still used for side effects if needed
+  await deriveBaseKey(password); 
+
 
   if (options.type === "RSA") {
     return await crypto.subtle.generateKey(
