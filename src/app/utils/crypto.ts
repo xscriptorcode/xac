@@ -64,9 +64,25 @@ export async function generateKeyPairFromPassword(
   throw new Error("Invalid key type");
 }
 
-export async function exportKeyToBase64(key: CryptoKey): Promise<string> {
-  const format = key.type === "private" ? "pkcs8" : "spki";
+export async function exportKeyToPEM(key: CryptoKey): Promise<string> {
+  let format: "pkcs8" | "spki";
+  let label: string;
+
+  if (key.type === "private") {
+    format = "pkcs8";
+    label = "PRIVATE KEY";
+  } else if (key.type === "public") {
+    format = "spki";
+    label = "PUBLIC KEY";
+  } else {
+    throw new Error("Unsupported key type for export");
+  }
+
   const exported = await crypto.subtle.exportKey(format, key);
   const buffer = new Uint8Array(exported);
-  return btoa(String.fromCharCode(...buffer));
+  const base64 = btoa(String.fromCharCode(...buffer));
+  const lines = base64.match(/.{1,64}/g)?.join("\n");
+
+  return `-----BEGIN ${label}-----\n${lines}\n-----END ${label}-----`;
 }
+

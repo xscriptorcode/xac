@@ -5,9 +5,8 @@ import PasswordInput from "@/app/components/keypair/passwordInput";
 import KeyOptionsSelector from "@/app/components/keypair/keyOptionsSelector";
 import GenerateButton from "@/app/components/keypair/generateButton";
 import KeyDisplay from "@/app/components/keypair/keyDisplay";
-import { exportKeyToBase64, KeyOptions } from "@/app/utils/crypto";
+import { exportKeyToPEM, KeyOptions } from "@/app/utils/crypto";
 import ThemeToggle from "../components/ThemeToggle";
-import { LockIcon } from "../components/icons/cryptoIcons";
 
 export default function KeyPairPage() {
   const [password, setPassword] = useState("");
@@ -20,8 +19,8 @@ export default function KeyPairPage() {
   const [privateKey, setPrivateKey] = useState<string | null>(null);
 
   const handleKeysGenerated = async (keyPair: CryptoKeyPair) => {
-    const pub = await exportKeyToBase64(keyPair.publicKey);
-    const priv = await exportKeyToBase64(keyPair.privateKey);
+    const pub = await exportKeyToPEM(keyPair.publicKey);
+    const priv = await exportKeyToPEM(keyPair.privateKey);
     setPublicKey(pub);
     setPrivateKey(priv);
   };

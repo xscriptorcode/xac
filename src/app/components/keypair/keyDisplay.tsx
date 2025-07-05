@@ -9,7 +9,7 @@ export default function KeyDisplay({ publicKey, privateKey }: Props) {
   return (
     <div className="mt-8 rounded-2xl p-6 backdrop-blur-md bg-white/10 border border-white/20 shadow-lg space-y-6 text-[var(--foreground)]">
       <div>
-        <h2 className="text-lg font-semibold mb-2">Clave pública</h2>
+        <h2 className="text-lg font-semibold mb-2">Public Key</h2>
         <textarea
           readOnly
           value={publicKey}
@@ -18,7 +18,7 @@ export default function KeyDisplay({ publicKey, privateKey }: Props) {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-2">Clave privada</h2>
+        <h2 className="text-lg font-semibold mb-2">Private Key</h2>
         <textarea
           readOnly
           value={privateKey}
