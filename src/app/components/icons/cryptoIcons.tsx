@@ -2,16 +2,29 @@ export function PasswordIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      viewBox="0 0 24 24"
-      className="w-6 h-6"
+      viewBox="0 0 64 24"
+      className="w-8 h-8"
+      fill="currentColor"
     >
-      <path
+      {/* Tres asteriscos */}
+      <text
+        x="8"
+        y="14"
+        fontSize="14"
+        fontFamily="monospace"
+        fill="currentColor"
+      >
+        * * *
+      </text>
+      {/* Línea inferior más larga */}
+      <line
+        x1="6"
+        y1="18"
+        x2="58"
+        y2="18"
+        stroke="currentColor"
+        strokeWidth="2"
         strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 17v-1m0 0a2 2 0 100-4 2 2 0 000 4zm0 0v1m8-5a8 8 0 11-16 0 8 8 0 0116 0z"
       />
     </svg>
   );

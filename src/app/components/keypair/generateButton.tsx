@@ -1,5 +1,7 @@
 "use client";
 
+import { LockIcon } from "../icons/cryptoIcons";
+
 type KeyOptions =
   | { type: "RSA"; bits: 2048 | 3072 | 4096 }
   | { type: "ECDSA"; curve: "P-256" | "P-384" | "P-521" };
@@ -24,14 +26,15 @@ export default function GenerateButton({ password, options, onKeysGenerated }: P
 
   return (
     <button
-      onClick={handleGenerate}
-      className="mt-4 w-full px-5 py-3 rounded-2xl 
-                 bg-white/10 backdrop-blur-md 
-                 border border-white/20 
-                 text-[var(--foreground)] font-semibold 
-                 hover:bg-white/20 transition duration-300 shadow-md"
-    >
-      Generar par de claves
-    </button>
+    onClick={handleGenerate}
+    className="mt-4 mx-auto px-4 py-2 w-fit rounded-xl
+      bg-white/10 backdrop-blur-md
+      border border-[color:var(--foreground)]/20
+      text-[color:var(--foreground)] font-semibold
+      hover:bg-white/20 transition duration-300 shadow-md
+      inline-flex items-center gap-2"
+  >
+    Generate <LockIcon />
+  </button>
   );
 }

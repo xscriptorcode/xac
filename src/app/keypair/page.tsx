@@ -7,6 +7,7 @@ import GenerateButton from "@/app/components/keypair/generateButton";
 import KeyDisplay from "@/app/components/keypair/keyDisplay";
 import { exportKeyToBase64, KeyOptions } from "@/app/utils/crypto";
 import ThemeToggle from "../components/ThemeToggle";
+import { LockIcon } from "../components/icons/cryptoIcons";
 
 export default function KeyPairPage() {
   const [password, setPassword] = useState("");
@@ -27,17 +28,22 @@ export default function KeyPairPage() {
 
   return (
     <main className="p-6 max-w-2xl mx-auto text-white">
-        <div className="flex flexcolumn items-center justify-center"><ThemeToggle /></div>
-      <h1 className="text-2xl font-bold mb-6">Generar par de claves</h1>
+      <div className="flex flexcolumn items-center justify-center">
+        <ThemeToggle />
+      </div>
+      <h1 className="mt-8 text-2xl flex justify-center font-bold mb-6 text-[color:var(--foreground)]">
+        KeyPair Generator
+      </h1>
 
       <PasswordInput value={password} onChange={setPassword} />
       <KeyOptionsSelector selected={options} onChange={setOptions} />
-      <GenerateButton
-        password={password}
-        options={options}
-        onKeysGenerated={handleKeysGenerated}
-      />
-
+      <div className="flex">
+        <GenerateButton
+          password={password}
+          options={options}
+          onKeysGenerated={handleKeysGenerated}
+        />
+      </div>
       {publicKey && privateKey && (
         <KeyDisplay publicKey={publicKey} privateKey={privateKey} />
       )}

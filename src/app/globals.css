@@ -50,3 +50,7 @@ body {
 }
 
 
+.dark select option {
+  background-color: #1b1d1f;
+  color: #ffffff;
+}

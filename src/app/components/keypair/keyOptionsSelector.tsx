@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 type KeyType = "RSA" | "ECDSA";
 
 type Props = {
@@ -12,7 +10,7 @@ type Props = {
 export default function KeyOptionsSelector({ selected, onChange }: Props) {
   const handleTypeChange = (type: KeyType) => {
     if (type === "RSA") {
-      onChange({ type: "RSA", bits: 2048 });
+      onChange({ type: "RSA", bits: 1024 });
     } else {
       onChange({ type: "ECDSA", curve: "P-256" });
     }
@@ -27,36 +25,36 @@ export default function KeyOptionsSelector({ selected, onChange }: Props) {
   };
 
   return (
-    <div className="mb-6 space-y-4 text-[currentColor]">
-      <label className="block text-sm font-semibold mb-1">Tipo de clave</label>
+    <div className="mb-6 flex flex-col items-center space-y-4 text-[color:var(--foreground)]">
+      <label className="block text-sm font-semibold mb-1 text-center">Tipo de clave</label>
+
       <div className="flex gap-4">
-        <button
-          className={`px-4 py-2 rounded-xl backdrop-blur-md border transition-all ${
-            selected.type === "RSA"
-              ? "bg-blue-600/80 border-blue-500 text-white"
-              : "bg-white/10 border-white/20"
-          }`}
-          onClick={() => handleTypeChange("RSA")}
-        >
-          RSA
-        </button>
-        <button
-          className={`px-4 py-2 rounded-xl backdrop-blur-md border transition-all ${
-            selected.type === "ECDSA"
-              ? "bg-blue-600/80 border-blue-500 text-white"
-              : "bg-white/10 border-white/20"
-          }`}
-          onClick={() => handleTypeChange("ECDSA")}
-        >
-          ECDSA
-        </button>
+        {["RSA", "ECDSA"].map((type) => (
+          <button
+            key={type}
+            className={`px-4 py-2 rounded-xl backdrop-blur-md border text-[color:var(--foreground)] shadow-md transition-all
+              ${
+                selected.type === type
+                  ? "border-blue-400 shadow-blue-500/20 bg-white/10 dark:bg-white/5"
+                  : "border-[color:var(--foreground)]/20 hover:border-[color:var(--foreground)]/40 bg-white/5 dark:bg-white/5"
+              }
+            `}
+            onClick={() => handleTypeChange(type as KeyType)}
+          >
+            {type}
+          </button>
+        ))}
       </div>
 
-      <label className="block text-sm font-semibold">
+      <label className="block text-sm font-semibold text-center">
         {selected.type === "RSA" ? "Tamaño (bits)" : "Curva elíptica"}
       </label>
+
       <select
-        className="w-full mt-1 px-3 py-2 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400 text-[currentColor]"
+        className="w-60 px-3 py-2 rounded-xl backdrop-blur-md 
+          bg-[color:var(--background)]/10 text-[color:var(--foreground)] 
+          border border-[color:var(--foreground)]/30 
+          shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
         value={selected.type === "RSA" ? selected.bits : selected.curve}
         onChange={(e) => handleOptionChange(e.target.value)}
       >
