@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: "export",          
   trailingSlash: true,       
-  basePath: "/xac",          
+  basePath: "/xac",     
+  distDir: "docs",     
   images: {
     unoptimized: true
   },
