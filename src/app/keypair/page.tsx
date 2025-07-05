@@ -31,7 +31,7 @@ export default function KeyPairPage() {
         <ThemeToggle />
       </div>
       <h1 className="mt-8 text-2xl flex justify-center font-bold mb-6 text-[color:var(--foreground)]">
-        KeyPair Generator
+        X Art Cypher
       </h1>
 
       <PasswordInput value={password} onChange={setPassword} />

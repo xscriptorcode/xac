@@ -37,7 +37,7 @@ export async function generateKeyPairFromPassword(
   password: string,
   options: KeyOptions
 ): Promise<CryptoKeyPair> {
-  await deriveBaseKey(password);
+  await deriveBaseKey(password); // still used for side effects if needed
 
   if (options.type === "RSA") {
     return await crypto.subtle.generateKey(
@@ -86,3 +86,34 @@ export async function exportKeyToPEM(key: CryptoKey): Promise<string> {
   return `-----BEGIN ${label}-----\n${lines}\n-----END ${label}-----`;
 }
 
+// 🔐 AES-GCM encryption using derived key
+export async function encryptFile(data: ArrayBuffer, password: string): Promise<Uint8Array> {
+  const key = await deriveBaseKey(password);
+  const iv = crypto.getRandomValues(new Uint8Array(12)); // 96-bit IV for AES-GCM
+
+  const encrypted = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv },
+    key,
+    data
+  );
+
+  // Concatenate IV + encrypted data
+  const encryptedBytes = new Uint8Array(encrypted);
+  const result = new Uint8Array(iv.length + encryptedBytes.length);
+  result.set(iv, 0);
+  result.set(encryptedBytes, iv.length);
+  return result;
+}
+
+// 🔓 AES-GCM decryption using derived key
+export async function decryptFile(encryptedData: Uint8Array, password: string): Promise<ArrayBuffer> {
+  const key = await deriveBaseKey(password);
+  const iv = encryptedData.slice(0, 12);
+  const ciphertext = encryptedData.slice(12);
+
+  return await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv },
+    key,
+    ciphertext
+  );
+}

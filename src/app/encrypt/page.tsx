@@ -16,7 +16,7 @@ export default function EncryptPage() {
   const handleFileRead = (buffer: ArrayBuffer, file: File) => {
     setFile(file);
     setBuffer(buffer);
-    setEncryptedBlob(null); // reinicia si se sube otro archivo
+    setEncryptedBlob(null); 
   };
 
   const handleEncrypt = async () => {
