@@ -15,7 +15,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "X Art Cypher",
   description: "Offline client-side file encryption",
-  manifest: "/manifest.json"
 };
 
 export default function RootLayout({
