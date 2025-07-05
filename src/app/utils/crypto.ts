@@ -1,4 +1,4 @@
-pero puedes extender esto para firmar o sal)
+"use client";
 async function deriveBaseKey(password: string): Promise<CryptoKey> {
   const encoder = new TextEncoder();
   const salt = encoder.encode("XAC-Static-Salt");

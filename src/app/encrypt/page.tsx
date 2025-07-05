@@ -1,34 +1,56 @@
 "use client";
 
-import FileUploader from "@/app/components/fileuploader";
 import { useState } from "react";
+import FileUploader from "@/app/components/fileuploader";
+import PasswordInput from "@/app/components/keypair/passwordInput";
+import EncryptButton from "@/app/components/keypair/generateButton";
+// import DownloadLink from "@/app/components/keypair/";  needs to define
+// import { encryptBufferWithPassword } from "@/utils/encryption"; // implement after
 
 export default function EncryptPage() {
-  const [fileName, setFileName] = useState<string | null>(null);
-  const [bufferSize, setBufferSize] = useState<number | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [buffer, setBuffer] = useState<ArrayBuffer | null>(null);
+  const [password, setPassword] = useState("");
+  const [encryptedBlob, setEncryptedBlob] = useState<Blob | null>(null);
 
   const handleFileRead = (buffer: ArrayBuffer, file: File) => {
-    console.log("Archivo leído:", file.name);
-    console.log("Buffer:", buffer.byteLength);
+    setFile(file);
+    setBuffer(buffer);
+    setEncryptedBlob(null); // reinicia si se sube otro archivo
+  };
 
-    setFileName(file.name);
-    setBufferSize(buffer.byteLength);
+  const handleEncrypt = async () => {
+    if (!buffer || !password) {
+      alert("Sube un archivo y escribe una contraseña.");
+      return;
+    }
 
-    // cypher logic
+    const encrypted = await encryptBufferWithºPassword(buffer, password);
+    setEncryptedBlob(new Blob([encrypted]));
   };
 
   return (
-    <main className="p-6">
+    <main className="p-6 max-w-xl mx-auto text-white">
       <h1 className="text-2xl font-semibold mb-4">Cifrar archivo</h1>
 
       <FileUploader onFileRead={handleFileRead} />
 
-      {fileName && (
-        <div className="mt-4 text-sm text-white">
-          <p><strong>Archivo:</strong> {fileName}</p>
-          <p><strong>Tamaño leído:</strong> {bufferSize} bytes</p>
+      {file && (
+        <div className="mt-4 text-sm">
+          <p><strong>Archivo:</strong> {file.name}</p>
+          <p><strong>Tamaño:</strong> {file.size} bytes</p>
         </div>
       )}
+
+      <div className="mt-6">
+        <PasswordInput value={password} onChange={setPassword} />
+        <EncryptButton onClick={handleEncrypt} disabled={!buffer || !password} />
+      </div>
+
+      {// {encryptedBlob && (
+        //<DownloadLink blob={encryptedBlob} filename={file!.name + ".enc"} />
+      //)}
+       }
     </main>
   );
 }
