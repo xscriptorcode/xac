@@ -3,7 +3,7 @@
 import { LockIcon } from "../icons/cryptoIcons";
 
 type KeyOptions =
-  | { type: "RSA"; bits: 2048 | 3072 | 4096 }
+  | { type: "RSA"; bits: 1024 | 2048 | 3072 | 7680 | 15360 }
   | { type: "ECDSA"; curve: "P-256" | "P-384" | "P-521" };
 
 type Props = {
