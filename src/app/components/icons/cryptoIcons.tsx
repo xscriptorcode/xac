@@ -6,7 +6,6 @@ export function PasswordIcon() {
       className="w-8 h-8"
       fill="currentColor"
     >
-      {/* Tres asteriscos */}
       <text
         x="8"
         y="14"
@@ -16,7 +15,6 @@ export function PasswordIcon() {
       >
         * * *
       </text>
-      {/* Línea inferior más larga */}
       <line
         x1="6"
         y1="18"

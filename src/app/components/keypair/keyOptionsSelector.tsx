@@ -26,7 +26,7 @@ export default function KeyOptionsSelector({ selected, onChange }: Props) {
 
   return (
     <div className="mb-6 flex flex-col items-center space-y-4 text-[color:var(--foreground)]">
-      <label className="block text-sm font-semibold mb-1 text-center">Tipo de clave</label>
+      <label className="block text-sm font-semibold mb-1 text-center">Key Type</label>
 
       <div className="flex gap-4">
         {["RSA", "ECDSA"].map((type) => (
@@ -47,7 +47,7 @@ export default function KeyOptionsSelector({ selected, onChange }: Props) {
       </div>
 
       <label className="block text-sm font-semibold text-center">
-        {selected.type === "RSA" ? "Tamaño (bits)" : "Curva elíptica"}
+        {selected.type === "RSA" ? "size (bits)" : "Eliptic curv"}
       </label>
 
       <select
