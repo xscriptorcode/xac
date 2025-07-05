@@ -15,7 +15,7 @@ export default function PasswordInput({ value, onChange}: Props){
         placeholder="Password to generate the pairkeys"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="text-current"
+        className="text-current border-2xl"
          />
          </div>
     );
